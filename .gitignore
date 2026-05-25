@@ -1,0 +1,46 @@
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Log files
+*.log
+logs/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Environment files
+.env
+.env*.local
+
+# Local secret properties
+local.properties
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Eclipse
+.settings/
+.project
+.classpath
+
