@@ -8,16 +8,18 @@ public class ProductDto {
     private String name;
     private String description;
     private BigDecimal price;
+    private int stock;
 
     // Constructors
     public ProductDto() {
     }
 
-    public ProductDto(Long id, String name, String description, BigDecimal price) {
+    public ProductDto(Long id, String name, String description, BigDecimal price, int stock) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.stock = stock;
     }
 
     // Getters and Setters
@@ -52,4 +54,13 @@ public class ProductDto {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 }
+

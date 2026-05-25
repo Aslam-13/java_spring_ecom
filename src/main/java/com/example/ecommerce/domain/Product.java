@@ -22,6 +22,8 @@ public class Product {
 
     private BigDecimal price;
 
+    private int stock;
+
     // Getters and Setters
     public Long getId() {
         return id;
@@ -54,4 +56,13 @@ public class Product {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 }
+

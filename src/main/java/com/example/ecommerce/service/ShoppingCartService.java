@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class ShoppingCartService {
@@ -63,6 +64,38 @@ public class ShoppingCartService {
 
         ShoppingCart savedCart = cartRepository.save(cart);
         return convertToDto(savedCart);
+    }
+
+    @Transactional
+    public ShoppingCartDto updateItemQuantity(Long userId, Long productId, int quantity) {
+        ShoppingCart cart = getCartOrThrow(userId);
+        CartItem itemToUpdate = findCartItemOrThrow(cart, productId);
+
+        itemToUpdate.setQuantity(quantity);
+        ShoppingCart savedCart = cartRepository.save(cart);
+        return convertToDto(savedCart);
+    }
+
+    @Transactional
+    public ShoppingCartDto removeItemFromCart(Long userId, Long productId) {
+        ShoppingCart cart = getCartOrThrow(userId);
+        CartItem itemToRemove = findCartItemOrThrow(cart, productId);
+
+        cart.getItems().remove(itemToRemove);
+        ShoppingCart savedCart = cartRepository.save(cart);
+        return convertToDto(savedCart);
+    }
+
+    private ShoppingCart getCartOrThrow(Long userId) {
+        return cartRepository.findByUserId(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Shopping cart not found for user id: " + userId));
+    }
+
+    private CartItem findCartItemOrThrow(ShoppingCart cart, Long productId) {
+        return cart.getItems().stream()
+                .filter(item -> item.getProduct().getId().equals(productId))
+                .findFirst()
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found in cart with id: " + productId));
     }
 
     public Optional<ShoppingCartDto> getCartByUserId(Long userId) {
