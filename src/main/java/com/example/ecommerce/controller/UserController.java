@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -23,6 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    // In a real app, GET endpoints for all users would be admin-only.
     @GetMapping
     public List<UserDto> getAllUsers() {
         return userService.getAllUsers();
